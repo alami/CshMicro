@@ -27,9 +27,11 @@ namespace Setup_Prog_Separate
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient<IResolutionService, ResolutionService>();
+            services.AddHttpClient<IPeriodService, PeriodService>();
             SD.VideoTariffAPIBase = Configuration["ServiceUrls:VideoTariffAPI"];
 
             services.AddScoped<IResolutionService, ResolutionService>();
+            services.AddScoped<IPeriodService, PeriodService>();
             services.AddControllersWithViews();
         }
 
