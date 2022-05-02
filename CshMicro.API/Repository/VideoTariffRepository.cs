@@ -30,12 +30,36 @@ namespace CshMicro.API.Repository
         }
         public async Task<VideoTariffDto> CreateUpdateVideoTariff(VideoTariffDto videoTariffDto)
         {
-            throw new NotImplementedException();
+            VideoTariff videoTariff = _mapper.Map<VideoTariffDto, VideoTariff>(videoTariffDto);
+            if (videoTariff.Id > 0)
+            {
+                _db.VideoTariffs.Update(videoTariff);
+            }
+            else
+            {
+                _db.VideoTariffs.Add(videoTariff);
+            }
+            await _db.SaveChangesAsync();
+            return _mapper.Map<VideoTariff, VideoTariffDto>(videoTariff);
         }
 
         public async Task<bool> DeleteVideoTariff(int videoTariffId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                VideoTariff videoTariff = await _db.VideoTariffs.FirstOrDefaultAsync(u => u.Id == videoTariffId);
+                if (videoTariff == null)
+                {
+                    return false;
+                }
+                _db.VideoTariffs.Remove(videoTariff);
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
