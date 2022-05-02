@@ -1,3 +1,5 @@
+using AutoMapper;
+using CshMicro.API;
 using CshMicro.API.DdContexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +32,9 @@ namespace StartUpAPI
         {
             services.AddDbContext<ApplicationDdContexts>(options => 
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+            services.AddSingleton(mapper);
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
