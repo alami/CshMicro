@@ -2,7 +2,7 @@
 {
     public class SD
     {
-        public static string methodAPIBase { get; set; }
+        public static string VideoTariffAPIBase { get; set; }
         public enum ApiType
         {
             GET,

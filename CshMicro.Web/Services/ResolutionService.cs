@@ -18,7 +18,7 @@ namespace CshMicro.Web.Services
             {
                 ApiType = SD.ApiType.POST,
                 Data = resolutionDto,
-                Url = SD.methodAPIBase + "/api/resolutions",
+                Url = SD.VideoTariffAPIBase + "/api/resolutions",
                 AccessToken = ""
             });
         }
@@ -28,19 +28,23 @@ namespace CshMicro.Web.Services
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.DELETE,
-                Url = SD.methodAPIBase + "/api/resolutions/" + id,
+                Url = SD.VideoTariffAPIBase + "/api/resolutions/" + id,
                 AccessToken = ""
             });
         }
 
         public async Task<T> GetAllResolutionsAsync<T>()
         {
-            return await this.SendAsync<T>(new ApiRequest()
+            var a1 = SD.ApiType.GET;
+            var a2 = SD.VideoTariffAPIBase + "/api/resolutions";
+            var a3 = new ApiRequest()
             {
-                ApiType = SD.ApiType.GET,
-                Url = SD.methodAPIBase + "/api/resolutions",
+                ApiType = a1,
+                Url = a2,
                 AccessToken = ""
-            });
+            };
+
+            return await this.SendAsync<T>(a3);
         }
 
         public async Task<T> GetResolutionByIdAsync<T>(int id)
@@ -48,7 +52,7 @@ namespace CshMicro.Web.Services
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = SD.methodAPIBase + "/api/resolutions/" + id,
+                Url = SD.VideoTariffAPIBase + "/api/resolutions/" + id,
                 AccessToken = ""
             });
         }
@@ -59,7 +63,7 @@ namespace CshMicro.Web.Services
             {
                 ApiType = SD.ApiType.PUT,
                 Data = resolutionDto,
-                Url = SD.methodAPIBase + "/api/resolutions",
+                Url = SD.VideoTariffAPIBase + "/api/resolutions",
                 AccessToken = ""
             });
         }

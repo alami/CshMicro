@@ -1,0 +1,52 @@
+﻿@using CshMicro.Web.Entities.Dto
+@model IEnumerable<ResolutionDto>
+
+<br />
+<br />
+<div class="container p-4 border">
+	<div class="row pb-2">
+		<div class="col">
+			<h1 class="text-primary">Resolutions List</h1>
+		</div>
+		<div class="col text-end pt-1">
+			<a asp-action="ResolutionCreate" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Create New Resolution</a>
+		</div>
+	</div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					Name
+				</th>
+				<th>
+					Order
+				</th>
+
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+			   <tr>
+				<td>
+								@item.Name
+				</td>
+				<td>
+								@item.DisplayOrder
+				</td>
+				<td>
+				</td>
+				<td>
+				 <a asp-action="EditResolution" class="btn btn-success" asp-route-resolutionId="@item.Name">
+				  <i class="fas fa-edit"></i>Редактировать
+				 </a>
+				 <a asp-action="DeleteResolution" class="btn btn-danger" asp-route-resolutionId="@item.Name">
+				  <i class="fas fa-trash"></i> Удалить
+				 </a>
+				</td>
+			   </tr>
+			}
+  </tbody>
+ </table>
+</div>
