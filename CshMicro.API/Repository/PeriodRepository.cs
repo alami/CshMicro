@@ -30,12 +30,36 @@ namespace CshMicro.API.Repository
         }
         public async Task<PeriodDto> CreateUpdatePeriod(PeriodDto periodDto)
         {
-            throw new NotImplementedException();
+            Period period = _mapper.Map<PeriodDto, Period>(periodDto);
+            if (period.Id > 0)
+            {
+                _db.Periods.Update(period);
+            }
+            else
+            {
+                _db.Periods.Add(period);
+            }
+            await _db.SaveChangesAsync();
+            return _mapper.Map<Period, PeriodDto>(period);
         }
 
         public async Task<bool> DeletePeriod(int periodId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Period period = await _db.Periods.FirstOrDefaultAsync(u => u.Id == periodId);
+                if (period == null)
+                {
+                    return false;
+                }
+                _db.Periods.Remove(period);
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

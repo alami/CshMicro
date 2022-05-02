@@ -30,12 +30,36 @@ namespace CshMicro.API.Repository
         }
         public async Task<ResolutionDto> CreateUpdateResolution(ResolutionDto resolutionDto)
         {
-            throw new NotImplementedException();
+            Resolution resolution = _mapper.Map<ResolutionDto, Resolution>(resolutionDto);
+            if (resolution.Id > 0)
+            {
+                _db.Resolutions.Update(resolution);
+            }
+            else
+            {
+                _db.Resolutions.Add(resolution);
+            }
+            await _db.SaveChangesAsync();
+            return _mapper.Map<Resolution, ResolutionDto>(resolution);
         }
 
         public async Task<bool> DeleteResolution(int resolutionId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Resolution resolution = await _db.Resolutions.FirstOrDefaultAsync(u => u.Id == resolutionId);
+                if (resolution == null)
+                {
+                    return false;
+                }
+                _db.Resolutions.Remove(resolution);
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
-    }
+    }    
 }

@@ -38,6 +38,8 @@ namespace StartUpAPI
             services.AddSingleton(mapper);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IPeriodRepository, PeriodRepository>();
+            services.AddScoped<IResolutionRepository, ResolutionRepository>();
+            services.AddScoped<IVideoTariffRepository, VideoTariffRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

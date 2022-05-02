@@ -5,17 +5,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CshMicro.API.Controllers
 {
-    [Route("api/periods")]
+    [Route("api/resolutions")]
     [ApiController]
 
-    public class PeriodAPIController : ControllerBase
+    public class ResolutionAPIController : ControllerBase
     {
         protected ResponseDto _response;
-        private IPeriodRepository _periodRepository;
+        private IResolutionRepository _resolutionRepository;
 
-        public PeriodAPIController(IPeriodRepository periodRepository)
+        public ResolutionAPIController(IResolutionRepository resolutionRepository)
         {
-            _periodRepository = periodRepository;
+            _resolutionRepository = resolutionRepository;
             this._response = new ResponseDto();
         }
         [HttpGet]
@@ -23,8 +23,8 @@ namespace CshMicro.API.Controllers
         {
             try
             {
-                IEnumerable<PeriodDto> periodDtos = await _periodRepository.GetPeriods();
-                _response.Result = periodDtos;
+                IEnumerable<ResolutionDto> resolutionDtos = await _resolutionRepository.GetResolutions();
+                _response.Result = resolutionDtos;
             }
             catch (Exception ex)
             {
@@ -40,8 +40,8 @@ namespace CshMicro.API.Controllers
         {
             try
             {
-                PeriodDto periodDto = await _periodRepository.GetPeriodById(id);
-                _response.Result = periodDto;
+                ResolutionDto resolutionDto = await _resolutionRepository.GetResolutionById(id);
+                _response.Result = resolutionDto;
             }
             catch (Exception ex)
             {
@@ -52,11 +52,11 @@ namespace CshMicro.API.Controllers
             return _response;
         }
         [HttpPost]
-        public async Task<object> Post([FromBody] PeriodDto periodDto)
+        public async Task<object> Post([FromBody] ResolutionDto resolutionDto)
         {
             try
             {
-                PeriodDto model = await _periodRepository.CreateUpdatePeriod(periodDto);
+                ResolutionDto model = await _resolutionRepository.CreateUpdateResolution(resolutionDto);
                 _response.Result = model;
             }
             catch (Exception ex)
@@ -70,11 +70,11 @@ namespace CshMicro.API.Controllers
 
 
         [HttpPut]
-        public async Task<object> Put([FromBody] PeriodDto periodDto)
+        public async Task<object> Put([FromBody] ResolutionDto resolutionDto)
         {
             try
             {
-                PeriodDto model = await _periodRepository.CreateUpdatePeriod(periodDto);
+                ResolutionDto model = await _resolutionRepository.CreateUpdateResolution(resolutionDto);
                 _response.Result = model;
             }
             catch (Exception ex)
@@ -91,7 +91,7 @@ namespace CshMicro.API.Controllers
         {
             try
             {
-                bool isSuccess = await _periodRepository.DeletePeriod(id);
+                bool isSuccess = await _resolutionRepository.DeleteResolution(id);
                 _response.Result = isSuccess;
             }
             catch (Exception ex)
