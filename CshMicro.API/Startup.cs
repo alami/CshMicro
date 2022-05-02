@@ -1,6 +1,8 @@
 using AutoMapper;
 using CshMicro.API;
 using CshMicro.API.DdContexts;
+using CshMicro.API.Repository;
+using CshMicro.API.Repository.IRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +37,7 @@ namespace StartUpAPI
             IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
             services.AddSingleton(mapper);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<IPeriodRepository, PeriodRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

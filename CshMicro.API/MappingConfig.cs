@@ -12,6 +12,10 @@ namespace CshMicro.API
             {
                 config.CreateMap<VideoTariffDto, VideoTariff>();
                 config.CreateMap<VideoTariff, VideoTariffDto>();
+                config.CreateMap<PeriodDto, Period>();
+                config.CreateMap<Period, PeriodDto>();
+                config.CreateMap<ResolutionDto, Resolution>();
+                config.CreateMap<Resolution, ResolutionDto>();
             });
 
             return mappingConfig;
