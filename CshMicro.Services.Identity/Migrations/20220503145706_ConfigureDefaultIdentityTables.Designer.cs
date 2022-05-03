@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CshMicro.Services.Identity.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220503131001_ConfigureDefaultIdentityTables")]
+    [Migration("20220503145706_ConfigureDefaultIdentityTables")]
     partial class ConfigureDefaultIdentityTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,14 @@ namespace CshMicro.Services.Identity.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
