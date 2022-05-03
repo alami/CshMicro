@@ -1,0 +1,65 @@
+﻿@using CshMicro.Web.Entities.Dto
+@model IEnumerable<VideoTariffDto>
+
+<br />
+<br />
+<div class="container p-4 border">
+	<div class="row pb-2">
+		<div class="col">
+			<h1 class="text-primary">VideoTariffs List</h1>
+		</div>
+		<div class="col text-end pt-1">
+			<a asp-action="VideoTariffCreate" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Create New VideoTariff</a>
+		</div>
+	</div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					Name
+				</th>
+				<th>
+					Price
+				</th>
+				<th>
+					Description
+				</th>
+				<th>
+					Image
+				</th>
+
+
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+			   <tr>
+				<td>
+								@item.Name
+				</td>
+				<td>
+								@((item.Price).ToString("c"))
+				</td>
+				<td>
+								@Html.Raw(item.Description)
+				</td>
+				<td>
+								<img src="@item.Image" />
+				</td>
+				<td>
+				</td>
+				<td>
+				 <a asp-action="EditVideoTariff" class="btn btn-success" asp-route-videoTariffId="@item.Name">
+				  <i class="fas fa-edit"></i>Редактировать
+				 </a>
+				 <a asp-action="DeleteVideoTariff" class="btn btn-danger" asp-route-videoTariffId="@item.Name">
+				  <i class="fas fa-trash"></i> Удалить
+				 </a>
+				</td>
+			   </tr>
+			}
+  </tbody>
+ </table>
+</div>
