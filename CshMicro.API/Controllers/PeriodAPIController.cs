@@ -1,5 +1,6 @@
 ﻿using CshMicro.API.Entities.Dto;
 using CshMicro.API.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,7 @@ namespace CshMicro.API.Controllers
             _periodRepository = periodRepository;
             this._response = new ResponseDto();
         }
+        [Authorize]
         [HttpGet]
         public async Task<object> Get()
         {
@@ -34,6 +36,7 @@ namespace CshMicro.API.Controllers
             }
             return _response;
         }
+        [Authorize]
         [HttpGet]
         [Route("{id}")]
         public async Task<object> Get(int id)
@@ -51,6 +54,7 @@ namespace CshMicro.API.Controllers
             }
             return _response;
         }
+        [Authorize]
         [HttpPost]
         public async Task<object> Post([FromBody] PeriodDto periodDto)
         {
@@ -69,6 +73,7 @@ namespace CshMicro.API.Controllers
         }
 
 
+        [Authorize]
         [HttpPut]
         public async Task<object> Put([FromBody] PeriodDto periodDto)
         {
@@ -86,6 +91,7 @@ namespace CshMicro.API.Controllers
             return _response;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         public async Task<object> Delete(int id)
         {
